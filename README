@@ -1,4 +1,5 @@
-IMPORTANT! Script should be run as a superuser
+!!!IMPORTANT!!! Script should be run as a superuser
+
 This is a script with the following requirements:
 
 Create a shell script which will represent an automated test
@@ -12,3 +13,13 @@ Script should create a new user called “jenkins”
 Script should verify the user “jenkins” exists
 Script should create a temporary file containing “Hello World”
 Script should clean up after itself
+
+NOTES:
+Since I never used bakerlib before I was mainly inspired by the manual page https://www.mankier.com/1/beakerlib#
+Not sure if user jenkins should be also deleted as part of cleanup. If so it could be done simpy by 'userdel jenkins'
+The temporary file is created in the temporary directory so I suppose it should be considered as temporary since the folder is deleted during cleanup. Otherwise it could just be created using mktemp comman.
+Not sure if the last line is needed but it prints the report in a readable format for assessment.
+
+If you have any questions or if anything needs changing, feel free to contact my on my email adress jkbrsz@gmail.com
+
+Jakub Rusz
