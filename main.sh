@@ -16,20 +16,12 @@ fi
 #small example using beakerlib
 rlJournalStart
         rlPhaseStartTest
-            rlAssertRpm "setup"
-            rlAssertExists "/etc/passwd"
-            rlAssertGrep "root" "/etc/passwd"
+	    rlIsFedora 30 
+	    if [ $? -eq 0 ]; then
+		    rlPass "You are running Fedora 30"
+	    else
+		    rlFail "You are not running Fedora 30"
+	    fi
         rlPhaseEnd
 rlJournalEnd
 
-#check Fedora version from fedora-release file
-FED30=`cat /etc/fedora-release | grep 30 | wc -l` 
-if [ -f /etc/fedora-release ]; then
-	if [ $FED30 -eq 1 ]; then 
-		echo "You are running Fedora 30."
-	else
-		echo "You are not running Fedora 30."
-	fi
-else
-	echo "You are not using Fedora"
-fi	
