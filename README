@@ -1,0 +1,14 @@
+IMPORTANT! Script should be run as a superuser
+This is a script with the following requirements:
+
+Create a shell script which will represent an automated test
+You should use beakerlib as your testing library
+You should be able to execute the script from the Linux terminal
+Script should check that it is running on Fedora 30 
+Try to verify this in two separate ways
+In script setup make sure the lorax-composer package is installed
+Script should verify if the /var/lib/lorax/composer directory exists
+Script should create a new user called “jenkins”
+Script should verify the user “jenkins” exists
+Script should create a temporary file containing “Hello World”
+Script should clean up after itself

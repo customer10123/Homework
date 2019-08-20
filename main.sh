@@ -6,15 +6,20 @@ if [ -f /usr/share/beakerlib/beakerlib.sh ]; then
 else
 	echo "Beakerlib is not installed, will continue with installation."
 	#assuming you are on Fedora you can install using:
-	sudo dnf -y copr enable mvadkert/beakerlib-libraries
-	sudo dnf -y install beakerlib-libraries
+	dnf -y copr enable mvadkert/beakerlib-libraries
+	dnf -y install beakerlib-libraries
 fi
 
 #including beakerlib
 . /usr/share/beakerlib/beakerlib.sh
 
-#small example using beakerlib
 rlJournalStart
+# Setup phase: Prepare test directory
+        rlPhaseStartSetup
+            rlRun 'TmpDir=$(mktemp -d)' 0 'Creating tmp directory'
+            rlRun "pushd $TmpDir"
+        rlPhaseEnd
+
         rlPhaseStartTest
 	    rlIsFedora 30 
 	    if [ $? -eq 0 ]; then
@@ -22,6 +27,21 @@ rlJournalStart
 	    else
 		    rlFail "You are not running Fedora 30"
 	    fi
+	    if [ rlCheckRpm lorax-composer ]; then
+		    rlAssertRpm lorax-composer
+	    else
+		    yum install lorax-composer
+		    rlAssertRpm lorax-composer
+	    fi
+	    rlAssertExists "/var/lib/lorax/composer"
+        rlPhaseEnd
+
+	# Cleanup phase: Remove test directory
+        rlPhaseStartCleanup
+            rlRun "popd"
+            rlRun "rm -r $TmpDir" 0 "Removing tmp directory"
         rlPhaseEnd
 rlJournalEnd
 
+# Print the test report
+rlJournalPrintText
