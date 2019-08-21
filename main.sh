@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#Check if script is run as superuser
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 #Check if beakerlib is installed
 if [ -f /usr/share/beakerlib/beakerlib.sh ]; then
 	echo "Beakerlib is installed."
