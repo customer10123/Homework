@@ -45,7 +45,7 @@ rlJournalStart
 	    if [ rlCheckRpm lorax-composer ]; then
 		    rlAssertRpm lorax-composer
 	    else
-		    yum install lorax-composer
+		    yum -y install lorax-composer
 		    rlAssertRpm lorax-composer
 	    fi
 	    #Check if /var/lib/lorax/composer exists
