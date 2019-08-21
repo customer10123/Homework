@@ -49,7 +49,7 @@ rlJournalStart
 	    #Adding user jenkins
 	    rlRun "useradd jenkins" "0,9" "User jenkins was added or already exists"
 	    #Checking if user jenkins exists
-	    rlRun 'compgen -u | grep jenkins' 0 "User Jenkins exists"
+	    rlRun 'compgen -u | grep -w jenkins' 0 "User Jenkins exists"
 	    #Creating a file Hello.txt with "Hello World".
 	    rlRun 'echo "Hello World" >> Hello.txt' 
         rlPhaseEnd
