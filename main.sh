@@ -42,7 +42,7 @@ rlJournalStart
 		    rlFail "You are not running Fedora 30"
 	    fi
 	    #Check for lorax-composer. Install if not found.
-	    if [ rlCheckRpm lorax-composer ]; then
+	    if rlCheckRpm lorax-composer; then
 		    rlAssertRpm lorax-composer
 	    else
 		    yum -y install lorax-composer
