@@ -35,12 +35,8 @@ rlJournalStart
 		    rlFail "You are not running Fedora 30"
 	    fi
 	    #Second way to check if you're running Fedora 30
-	    FED30=`cat /etc/fedora-release | grep 30 | wc -l`
-	    if [ $FED30 -eq 1 ]; then
-		    rlPass "You are running Fedora 30"
-            else
-		    rlFail "You are not running Fedora 30"
-	    fi
+	    FED30=`cat /etc/fedora-release | grep -o -E '[0-9]+'` 
+	    rlAssertEquals "Fedora 30 check" $FED30 30
 	    #Check for lorax-composer. Install if not found.
 	    if rlCheckRpm lorax-composer; then
 		    rlAssertRpm lorax-composer
