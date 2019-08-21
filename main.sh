@@ -51,7 +51,7 @@ rlJournalStart
 	    #Check if /var/lib/lorax/composer exists
 	    rlAssertExists "/var/lib/lorax/composer"
 	    #Adding user jenkins
-	    useradd jenkins
+	    rlRun "useradd jenkins" "0,9" "User jenkins was added or already exists"
 	    #Checking if user jenkins exists
 	    rlRun 'compgen -u | grep jenkins' 0 "User Jenkins exists"
 	    #Creating a file Hello.txt with "Hello World".
